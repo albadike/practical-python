@@ -122,8 +122,8 @@ class StockTrack(object):
 
 class MarketSimulator(object):
     def __init__(self):
-        self.stocks = { }
-        self.prices = { }
+        self.stocks = {}
+        self.prices = {}
         self.time = 0
         self.observers = []
     def register(self,observer):

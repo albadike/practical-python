@@ -124,7 +124,7 @@ Let's solve the following problem:
 Here's a solution:
 
 ```python
-# sears.py
+# 1_sears.py
 bill_thickness = 0.11 * 0.001 # Meters (0.11 mm)
 sears_height = 442 # Height (meters)
 num_bills = 1
@@ -143,7 +143,7 @@ print('Final height', num_bills * bill_thickness)
 When you run it, you get the following output:
 
 ```bash
-bash % python3 sears.py
+bash % python3 1_sears.py
 1 1 0.00011
 2 2 0.00022
 3 4 0.00044
@@ -436,7 +436,7 @@ Your program should make a table that looks something like this:
 The following code fragment contains code from the Sears tower problem.  It also has a bug in it.
 
 ```python
-# sears.py
+# 1_sears.py
 
 bill_thickness = 0.11 * 0.001    # Meters (0.11 mm)
 sears_height   = 442             # Height (meters)

@@ -1,4 +1,4 @@
-# mortgage.py
+# 1_mortgage.py
 
 principal = 500000.0
 rate = 0.05

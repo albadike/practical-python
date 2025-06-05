@@ -183,7 +183,7 @@ Here is a program that calculates the total amount that Dave will have
 to pay over the life of the mortgage:
 
 ```python
-# mortgage.py
+# 1_mortgage.py
 
 principal = 500000.0
 rate = 0.05

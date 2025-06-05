@@ -1,4 +1,4 @@
-# mortgage.py
+# 1_mortgage.py
 #
 # Exercise 1.7
 # Dave has decided to take out a 30-year fixed rate mortgage of $500,000 

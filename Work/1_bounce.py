@@ -1,4 +1,4 @@
-# bounce.py
+# 1_bounce.py
 #
 # Exercise 1.5
 
