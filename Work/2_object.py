@@ -92,6 +92,7 @@ copy.Error(          copy.copy(           copy.deepcopy(       copy.dispatch_tab
 
 
 import csv
+import pprint
 
 
 with open('Work/Data/dowstocks.csv') as f:
@@ -100,7 +101,10 @@ with open('Work/Data/dowstocks.csv') as f:
     rows = next(reader)
 print(f'{headers=}')
 print(f'{rows=}')
+print('--')
 
 types = [str, float, str, str, float, float, float, float, int]
 records = {head: func(val) for head, func, val in zip(headers, types, rows)}
-print(f'{records=}')
+print(f"{records=}")
+print('--') 
+pprint.pprint(f"records {records}") # Note pprint() returns ("records")

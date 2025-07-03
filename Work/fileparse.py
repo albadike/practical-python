@@ -5,6 +5,8 @@
 import csv
 import pprint
 import sys
+import logging
+
 
 # def parse_csv(filename, select):
 #     '''
@@ -51,14 +53,16 @@ def parse_csv(file, select, types=None, has_header=False, silence_errors=False):
             headers = select
         except ValueError as e:
             if not silence_errors:
+                # Logging vs printing
+                # logger.warning("Row %d: Couldn't convert %s", rowno, row)
+                # logger.debug("Row %d: Reason %s", rowno, e)
                 print(f"**Error: Invalid column names! If your data contains column headers, confirm they are correctly set in 'select' and 'has_headers' arg - {e}**")
 
     else:
         random_headers = [f'col{r}' for r in range(1, len(headers)+1)]
-        print(
-            f'**No header found, using default headers: {random_headers}**')
+        print(f'**No header found, using default headers: {random_headers}**')
 
-    records = []
+    record_list_of_dicts = []
     line_num = 1
     for row in reader:
         line_num += 1
@@ -101,25 +105,38 @@ def parse_csv(file, select, types=None, has_header=False, silence_errors=False):
 
         # Make a dictionary
         record = dict(zip(headers, row))
-        records.append(record)
-    return records
+        record_list_of_dicts.append(record)
+    return record_list_of_dicts
 
 
 def main():
     """Main function to demonstrate CSV parsing."""
+    logger = logging.getLogger(__name__)
+    logging.basicConfig(level=logging.DEBUG)
     
+    # logging.basicConfig(
+    #     filename = 'app.log',            # Name of the log file (omit to use stderr)
+    #     filemode = 'w',                  # File mode (use 'a' to append)
+    #     level    = logging.WARNING,      # Logging level (DEBUG, INFO, WARNING, ERROR, or CRITICAL)
+    # )
+    
+    # Turn off all, but the most critical logging messages
+    # logging.getLogger('fileparse').setLevel(logging.CRITICAL)
+
     filename = 'Work/Data/portfolio.csv'
     select = ['name', 'price']             # Select columns by index; or by name if has_header=True
     types = [str, float]
-    has_header = True                      # Set to False if the file has no header row
+    has_header = False                      # Set to False if the file has no header row
     silence_errors = True                  # Set to False to see error messages
 
     with open(filename, 'rt') as file: 
         try:
-            records = parse_csv(file, select=select, types=types, has_header=has_header)
+            records = parse_csv(file, select=select, types=types, has_header=has_header)    # record is a list of dictionaries
         except TypeError as e:
             if not silence_errors:
-                print(f"**Error: File not found or mismatched 'select' columns {e}**")
+                # print(f"**Error: File not found or mismatched 'select' columns {e}**")
+                logger.warning("Couldn't convert %s", file)
+                logger.debug("Reason %s", e)
             # Stop the program immediately
             raise   # 1 is conventional for error; 0 for clean exit
 
@@ -128,4 +145,3 @@ def main():
     
 if __name__ == '__main__':
     main()
-    

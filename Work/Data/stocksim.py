@@ -13,7 +13,7 @@
 import math
 import time
 
-history_file = "dowstocks.csv"
+history_file = "Data/dowstocks.csv"
 
 # Convert a time string such as "4:00pm" to minutes past midnight
 def minutes(tm):
@@ -126,6 +126,7 @@ class MarketSimulator(object):
         self.prices = {}
         self.time = 0
         self.observers = []
+        
     def register(self,observer):
         self.observers.append(observer)
 
@@ -175,9 +176,6 @@ m.add_history(history_file)
 m.reset(minutes("9:30am"))
 
 m.register(BasicPrinter())
-m.register(LogPrinter("stocklog.csv"))
+m.register(LogPrinter("Data/stocklog.csv"))
 
 m.run(1)
-
-
-   
